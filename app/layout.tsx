@@ -1,27 +1,73 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Devendra Sharma Tour & Travels",
-  description:
-    "Explore the incredible beauty of India with Devendra Sharma Tour & Travels. Trusted domestic tour packages across India.",
-  keywords: "tour and travel, India tours, domestic travel, Devendra Sharma, travel packages",
+  metadataBase: new URL('https://yourdomain.com'),
+  title: 'Devendra Travels - Best Tour Packages in India | Book Now',
+  description: 'Discover amazing tour packages to Himalayas, Rajasthan, Kerala & more. Expert travel guides, affordable prices, best customer service. Book your adventure today!',
+  keywords: 'tour packages India, travel agency, vacation booking, Himalayas tours, Rajasthan tours, Kerala tours, affordable travel',
+  authors: [{ name: 'Devendra Travels' }],
+  openGraph: {
+    title: 'Devendra Travels - Best Tour Packages in India',
+    description: 'Book your dream vacation with expert guides and affordable packages',
+    type: 'website',
+    url: 'https://yourdomain.com',
+    images: [{
+      url: 'https://yourdomain.com/og-image.jpg',
+      width: 1200,
+      height: 630,
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Devendra Travels - Tour Packages',
+    description: 'Book your dream vacation today',
+  },
+  robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+  alternates: {
+    canonical: '/',
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-      </body>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="https://yourdomain.com" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'TravelAgency',
+              name: 'Devendra Travels',
+              image: 'https://yourdomain.com/logo.png',
+              description: 'Best tour and travel packages in India',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: 'Meerut',
+                addressLocality: 'Meerut',
+                addressRegion: 'Uttar Pradesh',
+                postalCode: '250001',
+                addressCountry: 'IN',
+              },
+              telephone: '+91-98765-43210',
+              email: 'info@devendratravels.com',
+              url: 'https://yourdomain.com',
+              sameAs: [
+                'https://www.facebook.com/devendratravels',
+                'https://www.instagram.com/devendratravels',
+              ],
+            }),
+          }}
+        />
+      </head>
+      <body>{children}</body>
     </html>
   );
 }

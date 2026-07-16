@@ -1,3 +1,5 @@
+import { CONTACT_INFO } from "@/lib/config";
+
 "use client";
 import { useState } from "react";
 
@@ -10,6 +12,7 @@ export default function ContactPage() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -17,9 +20,41 @@ export default function ContactPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    console.log("Form submitted with data:", formData);
+
+    setLoading(true);
+    try {
+      const response = await fetch("/api/enquiries", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      console.log("API Response:", data);
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          tour: "",
+          message: "",
+        });
+      } else {
+        alert("Error: " + data.error);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error submitting enquiry");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -56,7 +91,7 @@ export default function ContactPage() {
                   {
                     icon: "📍",
                     label: "Office Address",
-                    value: "Devendra Sharma Tour & Travels, Muradnagar, Uttar Pradesh, India",
+                    value: "Devendra Sharma Tour & Travels, Meerut, Uttar Pradesh, India",
                   },
                   {
                     icon: "📞",
@@ -66,12 +101,12 @@ export default function ContactPage() {
                   {
                     icon: "✉️",
                     label: "Email",
-                    value: "devendrasharma227@gmail.com",
+                    value: "nishantsharma22787@gmail.com",
                   },
                   {
                     icon: "🕐",
                     label: "Working Hours",
-                    value: "Mon – Sat: 9:00 AM – 7:00 PM",
+                    value: "Mon – Sun: 24 hours",
                   },
                 ].map((item) => (
                   <div key={item.label} className="flex items-start gap-4">
@@ -111,6 +146,12 @@ export default function ContactPage() {
                   <p className="font-body text-earth-600 text-lg">
                     We've received your enquiry. Our team will contact you within 24 hours.
                   </p>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="mt-6 px-6 py-2 bg-saffron-500 text-white rounded-lg hover:bg-saffron-600"
+                  >
+                    Send Another Enquiry
+                  </button>
                 </div>
               ) : (
                 <>
@@ -200,9 +241,10 @@ export default function ContactPage() {
 
                     <button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-saffron-500 to-saffron-700 hover:from-saffron-600 hover:to-saffron-800 text-white font-body font-semibold py-4 rounded-xl transition-all duration-300 shadow-lg text-base mt-2"
+                      disabled={loading}
+                      className="w-full bg-gradient-to-r from-saffron-500 to-saffron-700 hover:from-saffron-600 hover:to-saffron-800 text-white font-body font-semibold py-4 rounded-xl transition-all duration-300 shadow-lg text-base mt-2 disabled:opacity-50"
                     >
-                      Send Enquiry 🚀
+                      {loading ? "Sending..." : "Send Enquiry 🚀"}
                     </button>
                   </form>
                 </>

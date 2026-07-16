@@ -1,5 +1,12 @@
+import { Metadata } from 'next';
 import CallToAction from "@/components/CallToAction";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: 'Tour Packages - Himalayas, Rajasthan, Kerala & More | Devendra Travels',
+  description: 'Explore our exclusive tour packages. Golden Triangle, Himalayas, Rajasthan, Kerala, Goa & custom tours. Affordable prices, expert guides, unforgettable experiences.',
+  keywords: 'tour packages, golden triangle tour, himalayas tour, rajasthan tour, kerala tour, goa beaches',
+};
 
 const tours = [
   {

@@ -1,5 +1,17 @@
+import { Metadata } from 'next';
 import CallToAction from "@/components/CallToAction";
 
+export const metadata: Metadata = {
+  title: 'About Devendra Travels - Your Trusted Travel Partner Since 2010 | India Tours',
+  description: 'Learn about Devendra Travels. 15+ years of expertise creating unforgettable journeys across India. Meet our team of expert travel guides and discover why thousands trust us.',
+  keywords: 'about us, travel company, experienced guides, tour operator, travel agency, Meerut',
+  openGraph: {
+    title: 'About Devendra Travels - Trusted Travel Partner',
+    description: 'Discover our journey and expertise in creating amazing travel experiences',
+    type: 'website',
+    url: 'https://yourdomain.com/about',
+  },
+};
 export default function AboutPage() {
   return (
     <>
