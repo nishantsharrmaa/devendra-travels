@@ -3,6 +3,7 @@ import './globals.css';
 import { CONTACT_INFO } from '@/lib/config';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://yourdomain.com'),
@@ -73,6 +74,7 @@ export default function RootLayout({
       </head>
       <body>
         <Navbar />
+        <WhatsAppButton />
         <main className="min-h-screen">
           {children}
         </main>
