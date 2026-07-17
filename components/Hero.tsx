@@ -15,13 +15,7 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-sm px-5 py-2 rounded-full mb-8">
-          <span className="w-2 h-2 rounded-full bg-saffron-400 animate-pulse" />
-          <span className="font-body text-sm text-saffron-300 tracking-wide">
-            Trusted Domestic Tours Since 2005
-          </span>
-        </div>
+        {/* Badge removed to avoid covering logo */}
 
         {/* Headline */}
         <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
