@@ -6,6 +6,8 @@ const enquirySchema = new mongoose.Schema({
   phone: String,
   tour: String,
   message: String,
+  pickupLocation: String,
+  passengers: String,
   status: { type: String, default: 'Pending' },
   createdAt: { type: Date, default: Date.now },
 });

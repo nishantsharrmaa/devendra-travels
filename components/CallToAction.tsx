@@ -31,7 +31,7 @@ export default function CallToAction() {
           </Link>
         </div>
         <p className="font-body text-white/60 text-sm mt-8">
-          📞 Call us: {CONTACT_INFO.phone} &nbsp;|&nbsp; ✉️ {CONTACT_INFO.email}
+          📞 Call us: <a href={`tel:${CONTACT_INFO.phone.replace(/[^0-9+]/g, '')}`} className="hover:text-white transition-colors">{CONTACT_INFO.phone}</a> &nbsp;|&nbsp; ✉️ <a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-white transition-colors">{CONTACT_INFO.email}</a>
         </p>
       </div>
     </section>

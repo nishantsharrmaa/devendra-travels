@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 import CallToAction from "@/components/CallToAction";
 
 export const metadata: Metadata = {
@@ -127,24 +128,73 @@ export default function AboutPage() {
       <section className="py-24 bg-cream">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="text-saffron-600 font-body font-medium tracking-widest uppercase text-sm mb-3">
-            Meet the Founder
+            Meet Your Guide & Driver
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-earth-900 mb-16">
-            The Man Behind the Journey
+            The Man Behind the Wheel
           </h2>
           <div className="bg-white rounded-3xl shadow-xl p-10 flex flex-col md:flex-row items-center gap-10 text-left">
-            <div className="w-36 h-36 rounded-full bg-gradient-to-br from-saffron-400 to-earth-600 flex items-center justify-center text-6xl flex-shrink-0 shadow-lg">
-              👨‍💼
+            <div className="w-36 h-36 rounded-full flex-shrink-0 shadow-lg overflow-hidden relative border-4 border-white">
+              <Image
+                src="/father-photo.jpg"
+                alt="Devendra Sharma"
+                width={144}
+                height={144}
+                className="w-full h-full object-cover object-top"
+              />
             </div>
             <div>
               <h3 className="font-display text-3xl font-bold text-earth-900 mb-1">Devendra Sharma</h3>
-              <p className="text-saffron-600 font-body font-medium mb-4">Founder & Lead Tour Consultant</p>
-              <p className="font-body text-earth-700 text-lg leading-relaxed">
-                With over 20 years in the travel industry, Devendra has personally curated
-                hundreds of itineraries and led countless groups across India. His passion
-                for the country's diverse landscapes, heritage, and culture is the heart
-                of every tour we offer.
+              <p className="text-saffron-600 font-body font-medium mb-4">Your Personal Chauffeur & Expert Local Guide</p>
+              <p className="font-body text-earth-700 text-lg leading-relaxed mb-3">
+                With over 20 years of accident-free driving experience across India's most challenging terrains (including the steep hills of Uttarakhand and Himachal), Devendra ji ensures your family is in the safest hands.
               </p>
+              <p className="font-body text-earth-700 text-lg leading-relaxed">
+                He doesn't just drive; he acts as your trusted companion. From finding the cleanest highway dhabas to taking you to breathtaking hidden viewpoints, his deep local knowledge transforms a simple road trip into an unforgettable journey.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Vehicle / Ride Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            {/* Visual card */}
+            <div className="relative order-2 md:order-1">
+              <Image
+                src="/car-photo.jpg"
+                alt="Our Maruti Suzuki Ertiga - Spacious and Comfortable"
+                width={600}
+                height={400}
+                className="rounded-3xl object-cover h-80 w-full shadow-lg"
+              />
+            </div>
+            
+            <div className="order-1 md:order-2">
+              <p className="text-saffron-600 font-body font-medium tracking-widest uppercase text-sm mb-3">
+                Comfort & Safety First
+              </p>
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-earth-900 mb-6 leading-tight">
+                Your Ride for the Journey
+              </h2>
+              <p className="font-body text-earth-700 text-lg mb-6 leading-relaxed">
+                You'll be traveling in a spacious, well-maintained AC vehicle (Sedan/SUV). We ensure the car is rigorously serviced and deeply sanitized before every single trip.
+              </p>
+              <ul className="space-y-4">
+                {[
+                  "Powerful Air Conditioning for hot summer days",
+                  "Ample legroom and comfortable seating for long drives",
+                  "Spacious boot for all your family's luggage",
+                  "First-aid kit and emergency supplies always on board",
+                ].map((feature, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="text-saffron-500 mt-1">✓</span>
+                    <span className="font-body text-earth-800">{feature}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

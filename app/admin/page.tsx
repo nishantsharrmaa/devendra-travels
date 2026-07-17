@@ -7,6 +7,8 @@ interface Enquiry {
     email: string;
     phone: string;
     tour: string;
+    pickupLocation: string;
+    passengers: string;
     message: string;
     status: string;
     createdAt: string;
@@ -151,6 +153,12 @@ export default function AdminPage() {
                                             Phone
                                         </th>
                                         <th className="text-left py-3 px-4 font-semibold text-earth-900">
+                                            Pickup Location
+                                        </th>
+                                        <th className="text-left py-3 px-4 font-semibold text-earth-900">
+                                            Pax
+                                        </th>
+                                        <th className="text-left py-3 px-4 font-semibold text-earth-900">
                                             Tour
                                         </th>
                                         <th className="text-left py-3 px-4 font-semibold text-earth-900">
@@ -170,6 +178,8 @@ export default function AdminPage() {
                                             <td className="py-4 px-4 text-earth-800">{enquiry.name}</td>
                                             <td className="py-4 px-4 text-earth-800">{enquiry.email}</td>
                                             <td className="py-4 px-4 text-earth-800">{enquiry.phone}</td>
+                                            <td className="py-4 px-4 text-earth-800">{enquiry.pickupLocation || "-"}</td>
+                                            <td className="py-4 px-4 text-earth-800">{enquiry.passengers || "-"}</td>
                                             <td className="py-4 px-4 text-earth-800">{enquiry.tour || "-"}</td>
                                             <td className="py-4 px-4 text-earth-800 max-w-xs truncate">
                                                 {enquiry.message}

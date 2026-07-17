@@ -15,6 +15,8 @@ export async function POST(request: NextRequest) {
       email: body.email,
       phone: body.phone,
       tour: body.tour,
+      pickupLocation: body.pickupLocation,
+      passengers: body.passengers,
       message: body.message,
     });
 
@@ -36,6 +38,8 @@ export async function POST(request: NextRequest) {
 Name: ${body.name}
 Email: ${body.email}
 Phone: ${body.phone}
+Pickup Location: ${body.pickupLocation || 'N/A'}
+Passengers: ${body.passengers || 'N/A'}
 Interested Tour: ${body.tour || 'N/A'}
 Message: ${body.message}
 `,

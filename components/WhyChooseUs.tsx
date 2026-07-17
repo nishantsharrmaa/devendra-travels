@@ -1,33 +1,33 @@
 const reasons = [
   {
-    icon: "🛡️",
-    title: "20+ Years of Trust",
-    desc: "Two decades of experience means we know exactly what makes a great trip — and what doesn't.",
+    icon: "🚪",
+    title: "Door-to-Door Service",
+    desc: "Your vacation begins at your doorstep. We pick you up from your home and drop you back safely after the trip.",
   },
   {
-    icon: "💰",
-    title: "Best Price Guarantee",
-    desc: "We offer competitive, transparent pricing with zero hidden charges. What you see is what you pay.",
-  },
-  {
-    icon: "🗺️",
-    title: "Expert Local Knowledge",
-    desc: "Our team has explored every corner of India, giving you insider tips and off-the-beaten-path gems.",
+    icon: "⏱️",
+    title: "Total Flexibility",
+    desc: "Want to stop for a photo? Hungry for local food? Need a restroom break? You are in complete control of the schedule.",
   },
   {
     icon: "🤝",
-    title: "Personalised Itineraries",
-    desc: "No two travellers are alike. We craft custom trips tailored to your group, budget, and interests.",
+    title: "Your Personal Guide",
+    desc: "More than just a driver, you get a trusted, experienced local companion who knows the best routes and hidden gems.",
   },
   {
-    icon: "📞",
-    title: "24/7 Support",
-    desc: "From booking to return, our team is always a call away to handle anything that comes up.",
+    icon: "🛡️",
+    title: "Safe & Reliable",
+    desc: "Over two decades of accident-free driving experience in challenging terrains like the Himalayas.",
   },
   {
-    icon: "🚌",
-    title: "Comfortable Transport",
-    desc: "Well-maintained, air-conditioned vehicles with experienced drivers for safe, comfortable travel.",
+    icon: "💰",
+    title: "Transparent Pricing",
+    desc: "No hidden charges, tolls, or surprise fees. Everything is clearly explained before you book.",
+  },
+  {
+    icon: "🚘",
+    title: "Comfortable Ride",
+    desc: "Travel in a well-maintained, spacious, and air-conditioned vehicle with ample room for your family and luggage.",
   },
 ];
 

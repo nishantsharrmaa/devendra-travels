@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { CONTACT_INFO } from '@/lib/config';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://yourdomain.com'),
@@ -69,7 +71,13 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        <main className="min-h-screen">
+          {children}
+        </main>
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -8,6 +8,8 @@ export default function ContactPage() {
     email: "",
     phone: "",
     tour: "",
+    pickupLocation: "",
+    passengers: "",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -43,6 +45,8 @@ export default function ContactPage() {
           email: "",
           phone: "",
           tour: "",
+          pickupLocation: "",
+          passengers: "",
           message: "",
         });
       } else {
@@ -96,11 +100,13 @@ export default function ContactPage() {
                     icon: "📞",
                     label: "Phone / WhatsApp",
                     value: CONTACT_INFO.phone,
+                    href: `tel:${CONTACT_INFO.phone.replace(/[^0-9+]/g, '')}`,
                   },
                   {
                     icon: "✉️",
                     label: "Email",
                     value: CONTACT_INFO.email,
+                    href: `mailto:${CONTACT_INFO.email}`,
                   },
                   {
                     icon: "🕐",
@@ -116,7 +122,13 @@ export default function ContactPage() {
                       <p className="font-body font-semibold text-earth-900 text-sm uppercase tracking-wide mb-1">
                         {item.label}
                       </p>
-                      <p className="font-body text-earth-700">{item.value}</p>
+                      {item.href ? (
+                        <a href={item.href} className="font-body text-earth-700 hover:text-saffron-600 transition-colors block">
+                          {item.value}
+                        </a>
+                      ) : (
+                        <p className="font-body text-earth-700">{item.value}</p>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -222,6 +234,38 @@ export default function ContactPage() {
                         <option>Goa Beaches</option>
                         <option>Custom Tour</option>
                       </select>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="font-body text-sm font-semibold text-earth-800 mb-1 block">
+                          Pickup City / Address *
+                        </label>
+                        <input
+                          type="text"
+                          name="pickupLocation"
+                          value={formData.pickupLocation}
+                          onChange={handleChange}
+                          required
+                          placeholder="e.g. New Delhi"
+                          className="w-full border border-earth-200 rounded-xl px-4 py-3 font-body text-sm focus:outline-none focus:ring-2 focus:ring-saffron-400 transition"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-body text-sm font-semibold text-earth-800 mb-1 block">
+                          Passengers *
+                        </label>
+                        <input
+                          type="number"
+                          name="passengers"
+                          value={formData.passengers}
+                          onChange={handleChange}
+                          required
+                          min="1"
+                          placeholder="Number of people"
+                          className="w-full border border-earth-200 rounded-xl px-4 py-3 font-body text-sm focus:outline-none focus:ring-2 focus:ring-saffron-400 transition"
+                        />
+                      </div>
                     </div>
 
                     <div>

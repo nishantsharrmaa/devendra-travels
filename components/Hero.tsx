@@ -25,15 +25,12 @@ export default function Hero() {
 
         {/* Headline */}
         <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-          Discover the{" "}
-          <span className="text-gradient">Soul of India</span>
-          <br />
-          with Every Journey
+          Your Private{" "}
+          <span className="text-gradient">Chauffeur & Guide</span>
         </h1>
 
         <p className="font-body text-earth-200 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-          From the mighty Himalayas to tranquil Kerala backwaters — Devendra Sharma Tour &
-          Travels crafts unforgettable experiences across India's most breathtaking destinations.
+          We pick you up from your doorstep, drive you to your dream destination, and drop you safely back home. Experience India with ultimate comfort, safety, and flexibility.
         </p>
 
         {/* CTA Buttons */}
