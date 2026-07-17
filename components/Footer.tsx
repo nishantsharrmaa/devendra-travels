@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CONTACT_INFO } from "@/lib/config";
 
 export default function Footer() {
   return (
@@ -69,14 +70,14 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <span className="text-saffron-400">📞</span>
-                <a href="tel:+919876543210" className="font-body text-earth-300 hover:text-saffron-400 text-sm transition-colors">
-                  +91 98765 43210
+                <a href={`tel:${CONTACT_INFO.phone.replace(/[^0-9+]/g, '')}`} className="font-body text-earth-300 hover:text-saffron-400 text-sm transition-colors">
+                  {CONTACT_INFO.phone}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <span className="text-saffron-400">✉️</span>
-                <a href="mailto:info@devendratravels.com" className="font-body text-earth-300 hover:text-saffron-400 text-sm transition-colors">
-                  info@devendratravels.com
+                <a href={`mailto:${CONTACT_INFO.email}`} className="font-body text-earth-300 hover:text-saffron-400 text-sm transition-colors">
+                  {CONTACT_INFO.email}
                 </a>
               </li>
               <li className="flex items-center gap-3">

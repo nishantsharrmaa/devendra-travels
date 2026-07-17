@@ -1,7 +1,6 @@
-import { CONTACT_INFO } from "@/lib/config";
-
 "use client";
 import { useState } from "react";
+import { CONTACT_INFO } from "@/lib/config";  // ← ADD THIS LINE
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -91,22 +90,22 @@ export default function ContactPage() {
                   {
                     icon: "📍",
                     label: "Office Address",
-                    value: "Devendra Sharma Tour & Travels, Meerut, Uttar Pradesh, India",
+                    value: CONTACT_INFO.address,
                   },
                   {
                     icon: "📞",
                     label: "Phone / WhatsApp",
-                    value: "+91 9897788965",
+                    value: CONTACT_INFO.phone,
                   },
                   {
                     icon: "✉️",
                     label: "Email",
-                    value: "nishantsharma22787@gmail.com",
+                    value: CONTACT_INFO.email,
                   },
                   {
                     icon: "🕐",
                     label: "Working Hours",
-                    value: "Mon – Sun: 24 hours",
+                    value: CONTACT_INFO.hours,
                   },
                 ].map((item) => (
                   <div key={item.label} className="flex items-start gap-4">
@@ -127,7 +126,7 @@ export default function ContactPage() {
               <div className="rounded-2xl overflow-hidden h-64 bg-earth-200 flex items-center justify-center shadow-md">
                 <div className="text-center text-earth-500">
                   <div className="text-5xl mb-3">📍</div>
-                  <p className="font-body font-medium">Meerut, Uttar Pradesh</p>
+                  <p className="font-body font-medium">{CONTACT_INFO.address.split(", ").slice(-3).join(", ")}</p>
                   <p className="font-body text-sm text-earth-400 mt-1">
                     Embed Google Maps here
                   </p>

@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import './globals.css';
+import { CONTACT_INFO } from '@/lib/config';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://yourdomain.com'),
@@ -56,8 +58,8 @@ export default function RootLayout({
                 postalCode: '250001',
                 addressCountry: 'IN',
               },
-              telephone: '+91-98765-43210',
-              email: 'info@devendratravels.com',
+              telephone: CONTACT_INFO.phone,
+              email: CONTACT_INFO.email,
               url: 'https://yourdomain.com',
               sameAs: [
                 'https://www.facebook.com/devendratravels',

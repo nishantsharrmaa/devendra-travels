@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CONTACT_INFO } from "@/lib/config";
 
 export default function CallToAction() {
   return (
@@ -30,7 +31,7 @@ export default function CallToAction() {
           </Link>
         </div>
         <p className="font-body text-white/60 text-sm mt-8">
-          📞 Call us: +91 98765 43210 &nbsp;|&nbsp; ✉️ info@devendratravels.com
+          📞 Call us: {CONTACT_INFO.phone} &nbsp;|&nbsp; ✉️ {CONTACT_INFO.email}
         </p>
       </div>
     </section>

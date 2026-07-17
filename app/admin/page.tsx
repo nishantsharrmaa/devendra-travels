@@ -31,7 +31,7 @@ export default function AdminPage() {
     const fetchEnquiries = async () => {
         setLoading(true);
         try {
-            const response = await fetch("/api/enquiries");
+            const response = await fetch("/api/enquiries", { cache: 'no-store' });
             const data = await response.json();
             setEnquiries(data.enquiries || []);
         } catch (error) {

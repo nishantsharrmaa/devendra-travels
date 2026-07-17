@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Enquiry from '@/lib/models/Enquiry';
+import nodemailer from 'nodemailer';
+
+export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,6 +17,34 @@ export async function POST(request: NextRequest) {
       tour: body.tour,
       message: body.message,
     });
+
+    try {
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.SMTP_EMAIL,
+          pass: process.env.SMTP_PASSWORD,
+        },
+      });
+
+      const mailOptions = {
+        from: process.env.SMTP_EMAIL,
+        to: process.env.ADMIN_EMAIL,
+        subject: `New Enquiry from ${body.name}`,
+        text: `You have received a new enquiry from Devendra Travels website.
+
+Name: ${body.name}
+Email: ${body.email}
+Phone: ${body.phone}
+Interested Tour: ${body.tour || 'N/A'}
+Message: ${body.message}
+`,
+      };
+
+      await transporter.sendMail(mailOptions);
+    } catch (emailError) {
+      console.error('Error sending email:', emailError);
+    }
 
     return NextResponse.json({ success: true, enquiry }, { status: 201 });
   } catch (error: any) {
