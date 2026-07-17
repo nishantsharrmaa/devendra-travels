@@ -297,9 +297,6 @@ export default function ToursPage() {
                     <span className="font-body text-earth-600 text-sm flex items-center gap-1">
                       🗓️ {tour.duration}
                     </span>
-                    <span className="font-display text-2xl font-bold text-saffron-600">
-                      {tour.price}
-                    </span>
                   </div>
 
                   <p className="font-body text-earth-700 text-sm leading-relaxed mb-5">

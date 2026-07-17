@@ -69,12 +69,6 @@ export default function FeaturedTours() {
               {/* Bottom Info */}
               <div className="bg-white p-6 flex items-center justify-between">
                 <div>
-                  <span className="font-body text-earth-500 text-xs uppercase tracking-wide">
-                    Starting from
-                  </span>
-                  <div className="font-display text-2xl font-bold text-saffron-600">
-                    {tour.price}
-                  </div>
                   <div className="font-body text-earth-500 text-sm">🗓️ {tour.duration}</div>
                 </div>
                 <Link

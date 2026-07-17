@@ -1,10 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGODB_URI = 'mongodb://localhost:27017/devendra_travels';
-
-if (!MONGODB_URI) {
-  throw new Error('Please define MONGODB_URI');
-}
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/devendra_travels';
 
 let cached = (global as any).mongoose;
 

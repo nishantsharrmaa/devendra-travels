@@ -21,8 +21,8 @@ const reasons = [
   },
   {
     icon: "💰",
-    title: "Transparent Pricing",
-    desc: "No hidden charges, tolls, or surprise fees. Everything is clearly explained before you book.",
+    title: "Local Expertise",
+    desc: "Deep local knowledge and trusted partners — we craft routes and experiences only locals know about.",
   },
   {
     icon: "🚘",
