@@ -44,7 +44,7 @@ export default function WhyChooseUs() {
             Why Travellers Choose Us
           </h2>
           <p className="font-body text-earth-300 text-lg max-w-2xl mx-auto">
-            We don't just plan trips — we create memories that last a lifetime.
+            We don&apos;t just plan trips — we create memories that last a lifetime.
           </p>
         </div>
 

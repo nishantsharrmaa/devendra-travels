@@ -37,7 +37,7 @@ export default function Testimonials() {
             What Our Travellers Say
           </h2>
           <p className="font-body text-earth-600 text-lg max-w-xl mx-auto">
-            Don't just take our word for it — hear from the people who've journeyed with us.
+            Don&apos;t just take our word for it — hear from the people who&apos;ve journeyed with us.
           </p>
         </div>
 
@@ -56,7 +56,7 @@ export default function Testimonials() {
 
               {/* Quote */}
               <p className="font-body text-earth-700 leading-relaxed mb-6 text-sm italic">
-                "{t.text}"
+                &quot;{t.text}&quot;
               </p>
 
               {/* Author */}

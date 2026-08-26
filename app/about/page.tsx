@@ -28,7 +28,7 @@ export default function AboutPage() {
             About Us
           </h1>
           <p className="font-body text-earth-200 text-lg max-w-2xl mx-auto">
-            Two decades of passion, dedication, and love for India's incredible landscapes.
+            Two decades of passion, dedication, and love for India&apos;s incredible landscapes.
           </p>
         </div>
       </section>
@@ -47,7 +47,7 @@ export default function AboutPage() {
               <p className="font-body text-earth-700 text-lg mb-5 leading-relaxed">
                 Devendra Sharma Tour & Travels was founded with a single vision — to make
                 exploring India accessible, comfortable, and truly unforgettable for every
-                traveller. Based in Meerut, we've been crafting personalised domestic tour
+                traveller. Based in Meerut, we&apos;ve been crafting personalised domestic tour
                 packages for over two decades.
               </p>
               <p className="font-body text-earth-700 text-lg mb-5 leading-relaxed">
@@ -147,10 +147,10 @@ export default function AboutPage() {
               <h3 className="font-display text-3xl font-bold text-earth-900 mb-1">Devendra Sharma</h3>
               <p className="text-saffron-600 font-body font-medium mb-4">Your Personal Chauffeur & Expert Local Guide</p>
               <p className="font-body text-earth-700 text-lg leading-relaxed mb-3">
-                With over 20 years of accident-free driving experience across India's most challenging terrains (including the steep hills of Uttarakhand and Himachal), Devendra ji ensures your family is in the safest hands.
+                With over 20 years of accident-free driving experience across India&apos;s most challenging terrains (including the steep hills of Uttarakhand and Himachal), Devendra ji ensures your family is in the safest hands.
               </p>
               <p className="font-body text-earth-700 text-lg leading-relaxed">
-                He doesn't just drive; he acts as your trusted companion. From finding the cleanest highway dhabas to taking you to breathtaking hidden viewpoints, his deep local knowledge transforms a simple road trip into an unforgettable journey.
+                He doesn&apos;t just drive; he acts as your trusted companion. From finding the cleanest highway dhabas to taking you to breathtaking hidden viewpoints, his deep local knowledge transforms a simple road trip into an unforgettable journey.
               </p>
             </div>
           </div>
@@ -180,13 +180,13 @@ export default function AboutPage() {
                 Your Ride for the Journey
               </h2>
               <p className="font-body text-earth-700 text-lg mb-6 leading-relaxed">
-                You'll be traveling in a spacious, well-maintained AC vehicle (Sedan/SUV). We ensure the car is rigorously serviced and deeply sanitized before every single trip.
+                You&apos;ll be traveling in a spacious, well-maintained AC vehicle (Sedan/SUV). We ensure the car is rigorously serviced and deeply sanitized before every single trip.
               </p>
               <ul className="space-y-4">
                 {[
                   "Powerful Air Conditioning for hot summer days",
                   "Ample legroom and comfortable seating for long drives",
-                  "Spacious boot for all your family's luggage",
+                  "Spacious boot for all your family&apos;s luggage",
                   "First-aid kit and emergency supplies always on board",
                 ].map((feature, i) => (
                   <li key={i} className="flex items-start gap-3">

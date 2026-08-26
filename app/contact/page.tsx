@@ -68,7 +68,7 @@ export default function ContactPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-earth-900/60 to-earth-700/80" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <p className="text-saffron-400 font-body font-medium tracking-widest uppercase text-sm mb-3">
-            We'd Love to Hear From You
+            We&apos;d Love to Hear From You
           </p>
           <h1 className="font-display text-5xl md:text-6xl font-bold mb-6">
             Contact Us
@@ -155,7 +155,7 @@ export default function ContactPage() {
                     Thank You!
                   </h3>
                   <p className="font-body text-earth-600 text-lg">
-                    We've received your enquiry. Our team will contact you within 24 hours.
+                    We&apos;ve received your enquiry. Our team will contact you within 24 hours.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}

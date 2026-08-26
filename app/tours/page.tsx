@@ -264,7 +264,7 @@ export default function ToursPage() {
             Our Tour Packages
           </h1>
           <p className="font-body text-earth-200 text-lg max-w-2xl mx-auto">
-            From the Himalayas to the backwaters, discover India's finest destinations
+            From the Himalayas to the backwaters, discover India&apos;s finest destinations
             with our expertly curated domestic tour packages.
           </p>
         </div>
@@ -329,11 +329,11 @@ export default function ToursPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="text-5xl mb-6">🗺️</div>
           <h2 className="font-display text-4xl font-bold mb-4">
-            Don't See Your Dream Trip?
+            Don&apos;t See Your Dream Trip?
           </h2>
           <p className="font-body text-earth-200 text-lg mb-8 max-w-2xl mx-auto">
             We specialise in building fully custom itineraries tailored to your group size,
-            budget, and travel dates. Just tell us your dream, and we'll make it happen.
+            budget, and travel dates. Just tell us your dream, and we&apos;ll make it happen.
           </p>
           <Link
             href="/contact"

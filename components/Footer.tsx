@@ -20,7 +20,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="font-body text-earth-300 text-sm leading-relaxed max-w-xs mb-6">
-              Crafting unforgettable journeys across India's most breathtaking destinations
+              Crafting unforgettable journeys across India&apos;s most breathtaking destinations
               since 2005. Your trusted travel partner.
             </p>
             <div className="flex gap-3">

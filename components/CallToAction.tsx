@@ -14,7 +14,7 @@ export default function CallToAction() {
         </h2>
         <p className="font-body text-white/85 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
           Let us take the stress out of planning. Share your dream destination and travel dates,
-          and we'll create the perfect itinerary just for you.
+          and we&apos;ll create the perfect itinerary just for you.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
