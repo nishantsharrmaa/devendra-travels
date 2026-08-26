@@ -7,6 +7,9 @@ import CallToAction from "@/components/CallToAction";
 import HowItWorks from "@/components/HowItWorks";
 import FAQ from "@/components/FAQ";
 import SeasonalBanner from "@/components/SeasonalBanner";
+import IndiaMapExplorer from "@/components/IndiaMapExplorer";
+import TripPlannerSection from "@/components/TripPlannerSection";
+import BookingFormSection from "@/components/BookingFormSection";
 
 export default function Home() {
   return (
@@ -15,6 +18,9 @@ export default function Home() {
       <Hero />
       <Stats />
       <HowItWorks />
+      <IndiaMapExplorer />
+      <TripPlannerSection />
+      <BookingFormSection />
       <FeaturedTours />
       <WhyChooseUs />
       <Testimonials />

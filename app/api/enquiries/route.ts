@@ -5,6 +5,11 @@ import nodemailer from 'nodemailer';
 
 export const dynamic = 'force-dynamic';
 
+function isAdminAuthorized(request: NextRequest) {
+  const configuredPassword = process.env.ADMIN_PASSWORD;
+  return Boolean(configuredPassword) && request.headers.get('x-admin-password') === configuredPassword;
+}
+
 export async function POST(request: NextRequest) {
   try {
     await dbConnect();
@@ -60,8 +65,12 @@ Message: ${body.message}
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    if (!isAdminAuthorized(request)) {
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    }
+
     await dbConnect();
     const enquiries = await Enquiry.find({}).sort({ createdAt: -1 });
 

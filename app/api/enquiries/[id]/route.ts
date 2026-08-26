@@ -2,11 +2,20 @@ import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Enquiry from '@/lib/models/Enquiry';
 
+function isAdminAuthorized(request: NextRequest) {
+  const configuredPassword = process.env.ADMIN_PASSWORD;
+  return Boolean(configuredPassword) && request.headers.get('x-admin-password') === configuredPassword;
+}
+
 export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
+    if (!isAdminAuthorized(request)) {
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    }
+
     await dbConnect();
     const body = await request.json();
 
@@ -38,6 +47,10 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
+    if (!isAdminAuthorized(request)) {
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    }
+
     await dbConnect();
 
     const enquiry = await Enquiry.findByIdAndDelete(params.id);

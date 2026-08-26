@@ -17,14 +17,20 @@ interface Enquiry {
 export default function AdminPage() {
     const [password, setPassword] = useState("");
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [adminPassword, setAdminPassword] = useState("");
     const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
     const [loading, setLoading] = useState(false);
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (password === "admin123") {
+        const response = await fetch("/api/enquiries", {
+            headers: { "x-admin-password": password },
+            cache: "no-store",
+        });
+        if (response.ok) {
+            setAdminPassword(password);
             setIsAuthenticated(true);
-            fetchEnquiries();
+            setEnquiries((await response.json()).enquiries || []);
         } else {
             alert("Wrong password!");
         }
@@ -33,7 +39,10 @@ export default function AdminPage() {
     const fetchEnquiries = async () => {
         setLoading(true);
         try {
-            const response = await fetch("/api/enquiries", { cache: 'no-store' });
+            const response = await fetch("/api/enquiries", {
+                headers: { "x-admin-password": adminPassword },
+                cache: 'no-store',
+            });
             const data = await response.json();
             setEnquiries(data.enquiries || []);
         } catch (error) {
@@ -47,7 +56,7 @@ export default function AdminPage() {
         try {
             const response = await fetch(`/api/enquiries/${id}`, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "x-admin-password": adminPassword },
                 body: JSON.stringify({ status: newStatus }),
             });
 
@@ -67,6 +76,7 @@ export default function AdminPage() {
         try {
             const response = await fetch(`/api/enquiries/${id}`, {
                 method: "DELETE",
+                headers: { "x-admin-password": adminPassword },
             });
 
             if (response.ok) {
@@ -100,9 +110,6 @@ export default function AdminPage() {
                             Login
                         </button>
                     </form>
-                    <p className="text-center text-earth-600 text-sm mt-4">
-                        Password: <span className="font-mono">admin123</span>
-                    </p>
                 </div>
             </div>
         );

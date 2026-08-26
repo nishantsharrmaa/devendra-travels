@@ -56,6 +56,14 @@ export default function Hero() {
             )
           )}
         </div>
+
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          {["Private pickup", "Custom itinerary", "Flexible dates"].map((item) => (
+            <span key={item} className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white/90 backdrop-blur-sm">
+              {item}
+            </span>
+          ))}
+        </div>
       </div>
 
       {/* Bottom fade */}
