@@ -1,11 +1,21 @@
 import { Metadata } from 'next';
 import CallToAction from "@/components/CallToAction";
 import Link from "next/link";
+import { SITE_URL } from '@/lib/config';
 
 export const metadata: Metadata = {
-  title: 'Tour Packages - Himalayas, Rajasthan, Kerala & More | Devendra Travels',
-  description: 'Explore our exclusive tour packages. Golden Triangle, Himalayas, Rajasthan, Kerala, Goa & custom tours. Affordable prices, expert guides, unforgettable experiences.',
-  keywords: 'tour packages, golden triangle tour, himalayas tour, rajasthan tour, kerala tour, goa beaches',
+  title: 'All Tour Packages - Taj Mahal, Himalayas, Rajasthan & Kerala',
+  description: 'Explore verified India tour packages. Agra Taj Mahal day trips, Golden Triangle, Himachal, Rajasthan Royale, Kerala backwaters & custom itineraries at affordable rates.',
+  keywords: 'tour packages India, Agra day trip from Delhi, Golden Triangle tour, Himachal tour package, Rajasthan tour, Kerala backwaters, custom holiday packages',
+  openGraph: {
+    title: 'Tour Packages across India - Devendra Travels',
+    description: 'Explore popular tour packages with transparent pricing, verified vehicles, and expert guides.',
+    url: `${SITE_URL}/tours`,
+    type: 'website',
+  },
+  alternates: {
+    canonical: '/tours',
+  },
 };
 
 const tours = [
@@ -250,8 +260,42 @@ const tours = [
 
 
 export default function ToursPage() {
+  const toursSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Devendra Travels Tour Packages",
+    description: "Domestic tours and travel packages across India",
+    numberOfItems: tours.length,
+    itemListElement: tours.map((tour, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "TouristTrip",
+        name: tour.title,
+        description: tour.desc,
+        touristType: tour.category,
+        offers: {
+          "@type": "Offer",
+          price: tour.price.includes("₹") ? tour.price.replace(/[^0-9]/g, "") : undefined,
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
+          url: `${SITE_URL}/tours`,
+        },
+        provider: {
+          "@type": "TravelAgency",
+          name: "Devendra Travels",
+          url: SITE_URL,
+        },
+      },
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(toursSchema) }}
+      />
       {/* Header */}
       <section className="relative bg-earth-700 text-white py-28 overflow-hidden">
         <div className="absolute inset-0 hero-pattern opacity-60" />

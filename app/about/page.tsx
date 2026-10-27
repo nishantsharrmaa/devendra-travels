@@ -1,16 +1,20 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import CallToAction from "@/components/CallToAction";
+import { SITE_URL } from '@/lib/config';
 
 export const metadata: Metadata = {
-  title: 'About Devendra Travels - Your Trusted Travel Partner Since 2010 | India Tours',
-  description: 'Learn about Devendra Travels. 15+ years of expertise creating unforgettable journeys across India. Meet our team of expert travel guides and discover why thousands trust us.',
-  keywords: 'about us, travel company, experienced guides, tour operator, travel agency, Meerut',
+  title: 'About Us - Trusted Tour & Taxi Partner Since 2010',
+  description: 'Learn about Devendra Travels. Over 15 years of expertise delivering memorable journeys across India. Expert local drivers, customized packages, and 24/7 support.',
+  keywords: 'about us, travel agency Ghaziabad, tour operator India, experienced travel guides, taxi rental Delhi NCR',
   openGraph: {
     title: 'About Devendra Travels - Trusted Travel Partner',
-    description: 'Discover our journey and expertise in creating amazing travel experiences',
+    description: 'Discover our story and expertise in delivering unforgettable travel journeys across India.',
     type: 'website',
-    url: 'https://yourdomain.com/about',
+    url: `${SITE_URL}/about`,
+  },
+  alternates: {
+    canonical: '/about',
   },
 };
 export default function AboutPage() {

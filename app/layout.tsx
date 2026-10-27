@@ -1,35 +1,51 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { CONTACT_INFO } from '@/lib/config';
+import { SITE_URL, CONTACT_INFO } from '@/lib/config';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://yourdomain.com'),
-  title: 'Devendra Travels - Best Tour Packages in India | Book Now',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'Devendra Travels - Best Tour Packages in India | Book Now',
+    template: '%s | Devendra Travels',
+  },
   description: 'Discover amazing tour packages to Himalayas, Rajasthan, Kerala & more. Expert travel guides, affordable prices, best customer service. Book your adventure today!',
-  keywords: 'tour packages India, travel agency, vacation booking, Himalayas tours, Rajasthan tours, Kerala tours, affordable travel',
+  keywords: 'tour packages India, travel agency, vacation booking, Himalayas tours, Rajasthan tours, Kerala tours, affordable travel, Delhi NCR tours, Ghaziabad travel agency',
   authors: [{ name: 'Devendra Travels' }],
   openGraph: {
     title: 'Devendra Travels - Best Tour Packages in India',
     description: 'Book your dream vacation with expert guides and affordable packages',
     type: 'website',
-    url: 'https://yourdomain.com',
+    url: SITE_URL,
+    siteName: 'Devendra Travels',
     images: [{
-      url: 'https://yourdomain.com/og-image.jpg',
+      url: `${SITE_URL}/car-photo.jpg`,
       width: 1200,
       height: 630,
+      alt: 'Devendra Travels Tour Vehicles and Packages',
     }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Devendra Travels - Tour Packages',
-    description: 'Book your dream vacation today',
+    description: 'Book your dream vacation today with experienced guides and affordable rates.',
+    images: [`${SITE_URL}/car-photo.jpg`],
   },
-  robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   alternates: {
-    canonical: '/',
+    canonical: './',
   },
 };
 
@@ -43,7 +59,6 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href="https://yourdomain.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -51,22 +66,23 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'TravelAgency',
               name: 'Devendra Travels',
-              image: 'https://yourdomain.com/logo.png',
+              image: `${SITE_URL}/car-photo.jpg`,
               description: 'Best tour and travel packages in India',
               address: {
                 '@type': 'PostalAddress',
-                streetAddress: 'Meerut',
-                addressLocality: 'Meerut',
+                streetAddress: CONTACT_INFO.address,
+                addressLocality: 'Ghaziabad',
                 addressRegion: 'Uttar Pradesh',
-                postalCode: '250001',
+                postalCode: '201001',
                 addressCountry: 'IN',
               },
               telephone: CONTACT_INFO.phone,
               email: CONTACT_INFO.email,
-              url: 'https://yourdomain.com',
+              url: SITE_URL,
+              priceRange: '₹₹',
               sameAs: [
-                'https://www.facebook.com/devendratravels',
-                'https://www.instagram.com/devendratravels',
+                CONTACT_INFO.facebook,
+                CONTACT_INFO.instagram,
               ],
             }),
           }}

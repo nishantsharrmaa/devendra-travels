@@ -1,3 +1,5 @@
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://devendratravels.com';
+
 export const CONTACT_INFO = {
   phone: "+91 9897788965",
   whatsapp: "+91 9897788965",
