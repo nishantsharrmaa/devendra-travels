@@ -17,14 +17,14 @@ export default function Hero() {
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         {/* Badge removed to avoid covering logo */}
 
-        {/* Headline */}
+        {/* Headline — SEO: H1 contains primary keyword + location modifier */}
         <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-          Your Private{" "}
-          <span className="text-gradient">Chauffeur & Guide</span>
+          Private Taxi & Tours{" "}
+          <span className="text-gradient">from Ghaziabad & Delhi NCR</span>
         </h1>
 
         <p className="font-body text-earth-200 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-          We pick you up from your doorstep, drive you to your dream destination, and drop you safely back home. Experience India with ultimate comfort, safety, and flexibility.
+          Devendra Sharma — your trusted personal chauffeur & tour guide for 20+ years. Door-to-door pickup from Ghaziabad, Meerut, Noida & Delhi. Explore India in comfort, safety, and style.
         </p>
 
         {/* CTA Buttons */}
@@ -43,9 +43,9 @@ export default function Hero() {
           </Link>
         </div>
 
-        {/* Destinations Strip */}
+        {/* Destinations Strip — popular tour destinations = keyword signals */}
         <div className="mt-16 flex flex-wrap justify-center gap-3">
-          {["🏯 Rajasthan", "🏔️ Himachal", "🌴 Kerala", "🕌 Agra", "🏖️ Goa", "🕉️ Uttarakhand"].map(
+          {["🏯 Rajasthan", "🏔️ Himachal", "🌴 Kerala", "🕌 Agra", "🏖️ Goa", "🕉️ Uttarakhand", "⛰️ Kedarnath", "🕌 Varanasi"].map(
             (dest) => (
               <span
                 key={dest}
@@ -57,8 +57,17 @@ export default function Hero() {
           )}
         </div>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          {["Private pickup", "Custom itinerary", "Flexible dates"].map((item) => (
+        {/* Local pickup areas — Local SEO keyword signals */}
+        <div className="mt-4 flex flex-wrap justify-center gap-3">
+          {["📍 Ghaziabad", "📍 Meerut", "📍 Noida", "📍 Delhi", "📍 Faridabad"].map((item) => (
+            <span key={item} className="rounded-full border border-saffron-500/40 bg-saffron-500/10 px-4 py-2 text-sm text-saffron-200 backdrop-blur-sm">
+              {item}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-4 flex flex-wrap justify-center gap-3">
+          {["✓ Door-to-door pickup", "✓ Custom itinerary", "✓ Flexible dates", "✓ 20+ years experience"].map((item) => (
             <span key={item} className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white/90 backdrop-blur-sm">
               {item}
             </span>
