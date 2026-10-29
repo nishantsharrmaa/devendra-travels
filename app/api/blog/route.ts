@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import BlogPostModel from '@/lib/models/BlogPost';
-import { blogPosts as defaultBlogPosts } from '@/lib/blog-data';
+import { getBlogPosts } from '@/lib/get-blog-posts';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,19 +12,12 @@ function isAdminAuthorized(request: NextRequest) {
 
 export async function GET() {
   try {
-    let customPosts: any[] = [];
-    try {
-      await dbConnect();
-      customPosts = await BlogPostModel.find({ published: true }).sort({ createdAt: -1 });
-    } catch {
-      // MongoDB might not be running locally; fall back to static data
-    }
-
-    // Merge static baseline posts with any posts created in MongoDB
-    const allPosts = [...customPosts, ...defaultBlogPosts];
-    return NextResponse.json({ success: true, posts: allPosts });
-  } catch (error: any) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    const posts = await getBlogPosts();
+    return NextResponse.json({ success: true, posts });
+  } catch (error) {
+    console.error('Error loading blog posts:', error);
+    const message = error instanceof Error ? error.message : 'Unable to load blog posts.';
+    return NextResponse.json({ success: false, error: message }, { status: 500 });
   }
 }
 
@@ -57,7 +50,7 @@ export async function POST(request: NextRequest) {
       readTime: body.readTime || '5 min read',
       authorName: body.authorName || 'Devendra Sharma',
       authorRole: body.authorRole || 'Founder & Senior Tour Guide',
-      image: body.image || '/car-photo.jpg',
+      image: body.image || undefined,
       keywords: body.keywords ? body.keywords.split(',').map((k: string) => k.trim()) : [],
       content: {
         intro: body.intro,

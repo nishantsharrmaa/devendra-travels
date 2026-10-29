@@ -51,7 +51,7 @@ export default function AboutPage() {
               <p className="font-body text-earth-700 text-lg mb-5 leading-relaxed">
                 Devendra Sharma Tour & Travels was founded with a single vision — to make
                 exploring India accessible, comfortable, and truly unforgettable for every
-                traveller. Based in Meerut, we&apos;ve been crafting personalised domestic tour
+                traveller. Based in Muradnagar, Ghaziabad, we&apos;ve been crafting personalised domestic tour
                 packages for over two decades.
               </p>
               <p className="font-body text-earth-700 text-lg mb-5 leading-relaxed">

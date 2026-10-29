@@ -30,7 +30,7 @@ const tours = [
     tag: "Day Trip",
     tagColor: "bg-amber-500",
     category: "Day Trips",
-    desc: "Visit the world's most iconic monument — the Taj Mahal — along with Agra Fort and Fatehpur Sikri. A perfect getaway from Meerut in a single day.",
+    desc: "Visit the world's most iconic monument — the Taj Mahal — along with Agra Fort and Fatehpur Sikri. A perfect getaway from Ghaziabad in a single day.",
     highlights: ["Taj Mahal at sunrise", "Agra Fort heritage walk", "Fatehpur Sikri UNESCO site"],
   },
   {
@@ -253,7 +253,7 @@ const tours = [
     tag: "Long Distance",
     tagColor: "bg-forest-600",
     category: "Multi-Day Tours",
-    desc: "These beautiful destinations are far from Meerut but we can plan the perfect trip — drive to airport or arrange a full-trip plan with local transfers.",
+    desc: "These beautiful destinations are a long journey from Ghaziabad, but we can plan the perfect trip — drive to the airport or arrange a full-trip plan with local transfers.",
     highlights: ["Goa beaches & water sports", "Alleppey houseboat stay", "Munnar tea gardens"],
   },
 ];

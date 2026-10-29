@@ -8,15 +8,15 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Devendra Travels - Best Tour Packages in India | Book Now',
+    default: 'Devendra Travels | Tours & Taxi in Muradnagar, Ghaziabad',
     template: '%s | Devendra Travels',
   },
-  description: 'Discover amazing tour packages to Himalayas, Rajasthan, Kerala & more. Expert travel guides, affordable prices, best customer service. Book your adventure today!',
-  keywords: 'tour packages India, travel agency, vacation booking, Himalayas tours, Rajasthan tours, Kerala tours, affordable travel, Delhi NCR tours, Ghaziabad travel agency',
+  description: 'Book private taxi services and India tour packages from Muradnagar, Ghaziabad. Plan Agra, Delhi, Uttarakhand, Rajasthan, and more with an experienced local driver.',
+  keywords: 'Muradnagar travel agency, Ghaziabad taxi service, tours from Ghaziabad, private taxi Muradnagar, India tour packages, Delhi NCR tours, Agra day trip',
   authors: [{ name: 'Devendra Travels' }],
   openGraph: {
-    title: 'Devendra Travels - Best Tour Packages in India',
-    description: 'Book your dream vacation with expert guides and affordable packages',
+    title: 'Devendra Travels | Tours & Taxi in Muradnagar, Ghaziabad',
+    description: 'Book private taxi services and India tour packages from Muradnagar, Ghaziabad.',
     type: 'website',
     url: SITE_URL,
     siteName: 'Devendra Travels',
@@ -29,8 +29,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Devendra Travels - Tour Packages',
-    description: 'Book your dream vacation today with experienced guides and affordable rates.',
+    title: 'Devendra Travels | Tours & Taxi in Ghaziabad',
+    description: 'Plan India tours and book a private taxi from Muradnagar, Ghaziabad.',
     images: [`${SITE_URL}/car-photo.jpg`],
   },
   robots: {
@@ -70,10 +70,8 @@ export default function RootLayout({
               description: 'Best tour and travel packages in India',
               address: {
                 '@type': 'PostalAddress',
-                streetAddress: CONTACT_INFO.address,
-                addressLocality: 'Ghaziabad',
+                addressLocality: 'Muradnagar, Ghaziabad',
                 addressRegion: 'Uttar Pradesh',
-                postalCode: '201001',
                 addressCountry: 'IN',
               },
               telephone: CONTACT_INFO.phone,

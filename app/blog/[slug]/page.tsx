@@ -1,9 +1,12 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { SITE_URL, CONTACT_INFO } from '@/lib/config';
-import { blogPosts } from '@/lib/blog-data';
+import { getBlogPosts } from '@/lib/get-blog-posts';
 import CallToAction from '@/components/CallToAction';
+
+export const revalidate = 300;
 
 interface Props {
   params: {
@@ -12,13 +15,13 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = blogPosts.find((p) => p.slug === params.slug);
+  const posts = await getBlogPosts();
+  const post = posts.find((p) => p.slug === params.slug);
 
   if (!post) {
     return {
@@ -41,20 +44,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
       authors: [post.author.name],
-      images: [
+      images: post.image ? [
         {
-          url: `${SITE_URL}/car-photo.jpg`,
+          url: post.image,
           width: 1200,
           height: 630,
           alt: post.title,
         },
-      ],
+      ] : undefined,
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.excerpt,
-      images: [`${SITE_URL}/car-photo.jpg`],
+      ...(post.image ? { images: [post.image] } : {}),
     },
     alternates: {
       canonical: `/blog/${post.slug}`,
@@ -62,8 +65,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function BlogPostPage({ params }: Props) {
-  const post = blogPosts.find((p) => p.slug === params.slug);
+export default async function BlogPostPage({ params }: Props) {
+  const posts = await getBlogPosts();
+  const post = posts.find((p) => p.slug === params.slug);
 
   if (!post) {
     notFound();
@@ -81,7 +85,7 @@ export default function BlogPostPage({ params }: Props) {
     },
     headline: post.title,
     description: post.excerpt,
-    image: `${SITE_URL}/car-photo.jpg`,
+    ...(post.image ? { image: post.image } : {}),
     datePublished: post.publishedAt,
     dateModified: post.updatedAt,
     author: {
@@ -172,47 +176,64 @@ export default function BlogPostPage({ params }: Props) {
       <section className="py-20 bg-cream">
         <div className="max-w-4xl mx-auto px-6">
           <div className="bg-white rounded-3xl p-8 md:p-14 shadow-xl border border-earth-100">
-            {/* Lead Intro */}
-            <p className="font-body text-earth-800 text-xl leading-relaxed mb-10 font-medium border-l-4 border-saffron-500 pl-6 italic">
-              {post.content.intro}
-            </p>
+            {post.image && (
+              <Image
+                src={post.image}
+                alt={post.title}
+                width={1200}
+                height={675}
+                unoptimized
+                className="mb-10 h-auto max-h-[28rem] w-full rounded-2xl object-cover"
+              />
+            )}
 
-            {/* Sections */}
-            <div className="space-y-12">
-              {post.content.sections.map((section, idx) => (
-                <div key={idx} className="space-y-4">
-                  <h2 className="font-display text-2xl md:text-3xl font-bold text-earth-900">
-                    {section.heading}
-                  </h2>
-                  <p className="font-body text-earth-700 text-base md:text-lg leading-relaxed">
-                    {section.body}
-                  </p>
+            {post.contentHtml ? (
+              <div
+                className="wordpress-content"
+                dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+              />
+            ) : (
+              <>
+                <p className="font-body text-earth-800 text-xl leading-relaxed mb-10 font-medium border-l-4 border-saffron-500 pl-6 italic">
+                  {post.content.intro}
+                </p>
 
-                  {section.tips && (
-                    <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 mt-4">
-                      <p className="font-body font-bold text-amber-900 text-sm mb-2 flex items-center gap-2">
-                        <span>💡</span> Pro Driver Tip:
+                <div className="space-y-12">
+                  {post.content.sections.map((section, idx) => (
+                    <div key={idx} className="space-y-4">
+                      <h2 className="font-display text-2xl md:text-3xl font-bold text-earth-900">
+                        {section.heading}
+                      </h2>
+                      <p className="font-body text-earth-700 text-base md:text-lg leading-relaxed">
+                        {section.body}
                       </p>
-                      <ul className="list-disc list-inside space-y-1 font-body text-amber-900 text-sm">
-                        {section.tips.map((tip, tIdx) => (
-                          <li key={tIdx}>{tip}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
 
-            {/* Conclusion */}
-            <div className="mt-12 pt-8 border-t border-earth-100">
-              <h3 className="font-display text-2xl font-bold text-earth-900 mb-3">
-                Final Thoughts
-              </h3>
-              <p className="font-body text-earth-700 text-base md:text-lg leading-relaxed">
-                {post.content.conclusion}
-              </p>
-            </div>
+                      {section.tips && (
+                        <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 mt-4">
+                          <p className="font-body font-bold text-amber-900 text-sm mb-2 flex items-center gap-2">
+                            <span>💡</span> Pro Driver Tip:
+                          </p>
+                          <ul className="list-disc list-inside space-y-1 font-body text-amber-900 text-sm">
+                            {section.tips.map((tip, tIdx) => (
+                              <li key={tIdx}>{tip}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-12 pt-8 border-t border-earth-100">
+                  <h3 className="font-display text-2xl font-bold text-earth-900 mb-3">
+                    Final Thoughts
+                  </h3>
+                  <p className="font-body text-earth-700 text-base md:text-lg leading-relaxed">
+                    {post.content.conclusion}
+                  </p>
+                </div>
+              </>
+            )}
 
             {/* Author Bio Box */}
             <div className="mt-12 bg-earth-50 rounded-2xl p-6 flex items-center gap-5 border border-earth-200">
@@ -235,7 +256,7 @@ export default function BlogPostPage({ params }: Props) {
                 Want to do this road trip hassle-free?
               </h3>
               <p className="font-body text-earth-100 text-sm max-w-xl mx-auto mb-6">
-                Travel in a sanitized, air-conditioned 7-seater Ertiga with our senior driver. Door-to-door pickup &amp; drop from Delhi, Noida, Ghaziabad, or Meerut.
+                Travel in a sanitized, air-conditioned 7-seater Ertiga with our senior driver. Door-to-door pickup &amp; drop from Muradnagar, Ghaziabad, Noida, or Delhi.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <Link

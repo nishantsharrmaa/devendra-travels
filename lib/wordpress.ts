@@ -1,75 +1,122 @@
-import { BlogPost, blogPosts as defaultBlogPosts } from '@/lib/blog-data';
+import { BlogPost } from '@/lib/blog-data';
 
-const WP_API_URL = process.env.WORDPRESS_API_URL;
+interface WordPressPost {
+  slug: string;
+  date?: string;
+  date_gmt?: string;
+  modified?: string;
+  modified_gmt?: string;
+  title?: { rendered?: string };
+  excerpt?: { rendered?: string };
+  content?: { rendered?: string };
+  _embedded?: {
+    author?: { name?: string }[];
+    'wp:featuredmedia'?: {
+      source_url?: string;
+      media_details?: {
+        sizes?: {
+          large?: { source_url?: string };
+          medium_large?: { source_url?: string };
+        };
+      };
+    }[];
+    'wp:term'?: { name?: string }[][];
+  };
+}
 
-/**
- * Transforms WordPress REST API post objects into our unified BlogPost schema.
- */
-export function formatWordPressPost(wpPost: any): BlogPost {
-  const featuredImage =
-    wpPost._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/car-photo.jpg';
+function decodeHtmlEntities(value: string): string {
+  return value
+    .replace(/&#(?:x([0-9a-f]+)|([0-9]+));/gi, (_, hex: string, decimal: string) => {
+      const codePoint = Number.parseInt(hex || decimal, hex ? 16 : 10);
+      return Number.isInteger(codePoint) && codePoint >= 0 && codePoint <= 0x10ffff
+        ? String.fromCodePoint(codePoint)
+        : '';
+    })
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;|&apos;/g, "'")
+    .replace(/&nbsp;/g, ' ');
+}
 
-  // Strip HTML tags for the clean excerpt
-  const rawExcerpt = wpPost.excerpt?.rendered || '';
-  const cleanExcerpt = rawExcerpt.replace(/<[^>]+>/g, '').trim();
+function htmlToText(value: string): string {
+  return decodeHtmlEntities(value.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, ' '))
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 
-  // Extract author name
-  const authorName = wpPost._embedded?.author?.[0]?.name || 'Devendra Sharma';
+function getPublishedDate(date?: string, dateGmt?: string): string {
+  const parsedDate = new Date(dateGmt || date || '');
+  return Number.isNaN(parsedDate.getTime()) ? new Date().toISOString() : parsedDate.toISOString();
+}
+
+export function formatWordPressPost(wpPost: WordPressPost): BlogPost {
+  const title = htmlToText(wpPost.title?.rendered || 'Untitled Travel Guide');
+  const excerpt = htmlToText(wpPost.excerpt?.rendered || '');
+  const contentHtml = wpPost.content?.rendered || '';
+  const categoryTerms = wpPost._embedded?.['wp:term']?.flat() || [];
+  const image =
+    wpPost._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.medium_large?.source_url ||
+    wpPost._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.large?.source_url ||
+    wpPost._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
+    contentHtml.match(/<img[^>]+src=["']([^"']+)["']/i)?.[1];
+  const publishedAt = getPublishedDate(wpPost.date, wpPost.date_gmt);
 
   return {
     slug: wpPost.slug,
-    title: wpPost.title?.rendered || 'Untitled Travel Guide',
-    excerpt: cleanExcerpt,
-    category: wpPost._embedded?.['wp:term']?.[0]?.[0]?.name || 'Travel Guide',
-    readTime: '5 min read',
-    publishedAt: wpPost.date_gmt ? `${wpPost.date_gmt}Z` : new Date().toISOString(),
-    updatedAt: wpPost.modified_gmt ? `${wpPost.modified_gmt}Z` : new Date().toISOString(),
+    title,
+    excerpt,
+    category: categoryTerms[0]?.name || 'Travel Guide',
+    readTime: `${Math.max(1, Math.ceil(htmlToText(contentHtml).split(/\s+/).filter(Boolean).length / 200))} min read`,
+    publishedAt,
+    updatedAt: getPublishedDate(wpPost.modified, wpPost.modified_gmt),
     author: {
-      name: authorName,
+      name: wpPost._embedded?.author?.[0]?.name || 'Devendra Sharma',
       role: 'Travel Contributor',
     },
-    image: featuredImage,
-    keywords: ['India travel', 'road trip', 'tour guide'],
+    ...(image ? { image } : {}),
+    keywords: categoryTerms.slice(1).map((term) => term.name).filter((name): name is string => Boolean(name)),
+    contentHtml,
     content: {
-      intro: cleanExcerpt,
-      sections: [
-        {
-          heading: 'Travel Overview & Highlights',
-          body: wpPost.content?.rendered?.replace(/<[^>]+>/g, ' ').slice(0, 1500) || '',
-        },
-      ],
-      conclusion: 'For a personalized door-to-door itinerary and private driver, reach out to Devendra Travels.',
+      intro: excerpt,
+      sections: [],
+      conclusion: '',
     },
   };
 }
 
-/**
- * Fetches blog posts from WordPress REST API if WORDPRESS_API_URL is configured.
- * Otherwise, falls back smoothly to built-in blog posts.
- */
-export async function getLiveBlogPosts(): Promise<BlogPost[]> {
-  if (!WP_API_URL) {
-    return defaultBlogPosts;
+export async function getWordPressBlogPosts(): Promise<BlogPost[]> {
+  const configuredUrl = process.env.WORDPRESS_API_URL;
+  if (!configuredUrl) {
+    return [];
   }
 
-  try {
-    const res = await fetch(`${WP_API_URL}/posts?_embed&per_page=20`, {
-      next: { revalidate: 60 }, // Incremental Static Regeneration (ISR)
-    });
-
-    if (!res.ok) {
-      console.warn('Failed to fetch from WordPress API, falling back to local data');
-      return defaultBlogPosts;
-    }
-
-    const data = await res.json();
-    if (!Array.isArray(data) || data.length === 0) {
-      return defaultBlogPosts;
-    }
-
-    return data.map(formatWordPressPost);
-  } catch (err) {
-    console.error('Error connecting to WordPress API:', err);
-    return defaultBlogPosts;
+  const endpoint = new URL(configuredUrl.replace(/\/+$/, ''));
+  if (!endpoint.pathname.replace(/\/+$/, '').endsWith('/posts')) {
+    endpoint.pathname = `${endpoint.pathname.replace(/\/+$/, '')}/posts`;
   }
+  endpoint.searchParams.set('_embed', '1');
+  endpoint.searchParams.set('per_page', '100');
+  endpoint.searchParams.set('status', 'publish');
+
+  const response = await fetch(endpoint, {
+    next: { revalidate: 300 },
+    signal: AbortSignal.timeout(4000),
+  });
+  if (!response.ok) {
+    throw new Error(`WordPress API returned ${response.status} ${response.statusText}.`);
+  }
+
+  const posts: unknown = await response.json();
+  if (!Array.isArray(posts)) {
+    throw new Error('WordPress API response was not a post list.');
+  }
+
+  if (!posts.every((post) => typeof post === 'object' && post !== null && 'slug' in post && typeof post.slug === 'string')) {
+    throw new Error('WordPress API returned a post without a valid slug.');
+  }
+
+  return posts.map((post) => formatWordPressPost(post as WordPressPost));
 }

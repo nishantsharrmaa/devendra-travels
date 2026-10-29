@@ -1,6 +1,26 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Model, Schema } from 'mongoose';
 
-const BlogPostSchema = new Schema(
+interface BlogPostRecord {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  readTime: string;
+  authorName: string;
+  authorRole: string;
+  image?: string;
+  keywords: string[];
+  content: {
+    intro: string;
+    sections: { heading?: string; body?: string; tips?: string[] }[];
+    conclusion?: string;
+  };
+  published: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+const BlogPostSchema = new Schema<BlogPostRecord>(
   {
     slug: { type: String, required: true, unique: true },
     title: { type: String, required: true },
@@ -9,7 +29,7 @@ const BlogPostSchema = new Schema(
     readTime: { type: String, default: '5 min read' },
     authorName: { type: String, default: 'Devendra Sharma' },
     authorRole: { type: String, default: 'Founder & Senior Tour Guide' },
-    image: { type: String, default: '/car-photo.jpg' },
+    image: { type: String },
     keywords: [{ type: String }],
     content: {
       intro: { type: String, required: true },
@@ -27,4 +47,8 @@ const BlogPostSchema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.models.BlogPost || mongoose.model('BlogPost', BlogPostSchema);
+const BlogPostModel: Model<BlogPostRecord> =
+  (mongoose.models.BlogPost as Model<BlogPostRecord> | undefined) ||
+  mongoose.model<BlogPostRecord>('BlogPost', BlogPostSchema);
+
+export default BlogPostModel;

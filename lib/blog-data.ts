@@ -10,7 +10,8 @@ export interface BlogPost {
     name: string;
     role: string;
   };
-  image: string;
+  image?: string;
+  contentHtml?: string;
   keywords: string[];
   relatedTourId?: number;
   content: {
@@ -37,7 +38,6 @@ export const blogPosts: BlogPost[] = [
       name: "Devendra Sharma",
       role: "Founder & Senior Tour Guide",
     },
-    image: "/car-photo.jpg",
     keywords: [
       "Delhi to Agra road trip",
       "Taj Mahal day tour by car",
@@ -84,7 +84,6 @@ export const blogPosts: BlogPost[] = [
       name: "Devendra Sharma",
       role: "Founder & Senior Tour Guide",
     },
-    image: "/car-photo.jpg",
     keywords: [
       "Mathura Vrindavan tour guide",
       "Banke Bihari temple timings",
@@ -118,7 +117,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "best-hill-stations-near-delhi-ncr-by-car",
     title: "Top 5 Hill Stations Near Delhi NCR for a Weekend Road Trip by Car",
-    excerpt: "Escape the city bustle! Here are the 5 best mountain getaways within comfortable driving distance from Delhi, Noida, Ghaziabad, and Meerut.",
+    excerpt: "Escape the city bustle! Here are the 5 best mountain getaways within comfortable driving distance from Delhi, Noida, Ghaziabad, and Muradnagar.",
     category: "Weekend Escapes",
     readTime: "7 min read",
     publishedAt: "2026-05-02T10:00:00Z",
@@ -127,7 +126,6 @@ export const blogPosts: BlogPost[] = [
       name: "Devendra Sharma",
       role: "Founder & Senior Tour Guide",
     },
-    image: "/car-photo.jpg",
     keywords: [
       "hill stations near Delhi NCR",
       "weekend road trip by car Delhi",

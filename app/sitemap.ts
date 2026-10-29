@@ -1,8 +1,11 @@
 import { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/config';
-import { blogPosts } from '@/lib/blog-data';
+import { getBlogPosts } from '@/lib/get-blog-posts';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 300;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const blogPosts = await getBlogPosts();
   const currentDate = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = [

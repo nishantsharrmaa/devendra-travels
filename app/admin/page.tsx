@@ -125,7 +125,6 @@ export default function AdminPage() {
         name: "Devendra Sharma",
         role: "Founder & Senior Tour Guide",
       },
-      image: "/car-photo.jpg",
       keywords: blogKeywords ? blogKeywords.split(",").map((k) => k.trim()) : [],
       content: {
         intro: blogIntro,

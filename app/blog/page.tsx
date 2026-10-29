@@ -1,8 +1,11 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '@/lib/config';
-import { blogPosts } from '@/lib/blog-data';
+import { getBlogPosts } from '@/lib/get-blog-posts';
 import CallToAction from '@/components/CallToAction';
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: 'Travel Guides & Road Trip Tips - India Tours',
@@ -19,7 +22,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogListingPage() {
+export default async function BlogListingPage() {
+  const blogPosts = await getBlogPosts();
   const blogSchema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -72,6 +76,16 @@ export default function BlogListingPage() {
                 key={post.slug}
                 className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group border border-earth-100"
               >
+                {post.image && (
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    width={1200}
+                    height={675}
+                    unoptimized
+                    className="h-52 w-full object-cover"
+                  />
+                )}
                 <div className="p-8 flex flex-col flex-grow">
                   <div className="flex items-center justify-between mb-4 text-xs font-semibold">
                     <span className="bg-saffron-100 text-saffron-800 px-3 py-1 rounded-full uppercase tracking-wider font-body">

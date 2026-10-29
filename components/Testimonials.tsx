@@ -17,7 +17,7 @@ const testimonials = [
   },
   {
     name: "Mohit Sharma",
-    city: "Meerut",
+    city: "Muradnagar",
     tour: "Uttarakhand Pilgrimage",
     rating: 5,
     text: "Devendra sir is not just a driver; he's a wonderful guide. He knew exactly where to avoid traffic and which temples to visit at what time. Highly recommend his door-to-door service!",

@@ -100,7 +100,7 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <span className="text-saffron-400 mt-0.5">📍</span>
                 <span className="font-body text-earth-300 text-sm">
-                  Meerut, Uttar Pradesh, India
+                  {CONTACT_INFO.address}
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -110,7 +110,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <span className="text-saffron-400">✉️</span>
+                <span className="text-saffron-400">📧</span>
                 <a href={`mailto:${CONTACT_INFO.email}`} className="font-body text-earth-300 hover:text-saffron-400 text-sm transition-colors">
                   {CONTACT_INFO.email}
                 </a>

@@ -61,7 +61,7 @@ export default function ContactPage() {
                     href: `tel:${CONTACT_INFO.phone.replace(/[^0-9+]/g, '')}`,
                   },
                   {
-                    icon: "✉️",
+                    icon: "📧",
                     label: "Email",
                     value: CONTACT_INFO.email,
                     href: `mailto:${CONTACT_INFO.email}`,
@@ -96,9 +96,9 @@ export default function ContactPage() {
               <div className="rounded-2xl overflow-hidden h-64 bg-earth-200 flex items-center justify-center shadow-md">
                 <div className="text-center text-earth-500">
                   <div className="text-5xl mb-3">📍</div>
-                  <p className="font-body font-medium">{CONTACT_INFO.address.split(", ").slice(-3).join(", ")}</p>
+                  <p className="font-body font-medium">{CONTACT_INFO.address}</p>
                   <p className="font-body text-sm text-earth-400 mt-1">
-                    Devendra Sharma Tour &amp; Travels, Ghaziabad, UP
+                    Devendra Sharma Tour &amp; Travels, Muradnagar, Ghaziabad, UP
                   </p>
                 </div>
               </div>

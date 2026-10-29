@@ -14,7 +14,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-texture opacity-30" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center translate-y-10 md:translate-y-14">
         {/* Badge removed to avoid covering logo */}
 
         {/* Headline — SEO: H1 contains primary keyword + location modifier */}
@@ -24,7 +24,7 @@ export default function Hero() {
         </h1>
 
         <p className="font-body text-earth-200 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-          Devendra Sharma — your trusted personal chauffeur & tour guide for 20+ years. Door-to-door pickup from Ghaziabad, Meerut, Noida & Delhi. Explore India in comfort, safety, and style.
+          Devendra Sharma — your trusted personal chauffeur & tour guide for 20+ years. Door-to-door pickup from Muradnagar, Ghaziabad, Noida & Delhi. Explore India in comfort, safety, and style.
         </p>
 
         {/* CTA Buttons */}
@@ -59,7 +59,7 @@ export default function Hero() {
 
         {/* Local pickup areas — Local SEO keyword signals */}
         <div className="mt-4 flex flex-wrap justify-center gap-3">
-          {["📍 Ghaziabad", "📍 Meerut", "📍 Noida", "📍 Delhi", "📍 Faridabad"].map((item) => (
+          {["📍 Muradnagar", "📍 Ghaziabad", "📍 Noida", "📍 Delhi", "📍 Faridabad"].map((item) => (
             <span key={item} className="rounded-full border border-saffron-500/40 bg-saffron-500/10 px-4 py-2 text-sm text-saffron-200 backdrop-blur-sm">
               {item}
             </span>

@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        display: ["'Playfair Display'", "serif"],
-        body: ["'DM Sans'", "sans-serif"],
+        display: ["Arial", "Helvetica", "sans-serif"],
+        body: ["Arial", "Helvetica", "sans-serif"],
       },
       colors: {
         saffron: {

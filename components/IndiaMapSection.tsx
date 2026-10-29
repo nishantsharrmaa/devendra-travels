@@ -95,11 +95,11 @@ export default function IndiaMapSection() {
               <circle cx="440" cy="470" r="28" fill="none" stroke="#ff8106" strokeOpacity="0.25" strokeWidth="10" />
               <circle cx="280" cy="560" r="28" fill="none" stroke="#ff8106" strokeOpacity="0.25" strokeWidth="10" />
 
-              <text x="205" y="195" fontSize="20" fontFamily="DM Sans, sans-serif" fill="#ac7a4a" fontWeight="700">Delhi</text>
-              <text x="305" y="335" fontSize="20" fontFamily="DM Sans, sans-serif" fill="#ac7a4a" fontWeight="700">Jaipur</text>
-              <text x="370" y="225" fontSize="20" fontFamily="DM Sans, sans-serif" fill="#ac7a4a" fontWeight="700">Shimla</text>
-              <text x="424" y="445" fontSize="20" fontFamily="DM Sans, sans-serif" fill="#ac7a4a" fontWeight="700">Udaipur</text>
-              <text x="255" y="585" fontSize="20" fontFamily="DM Sans, sans-serif" fill="#ac7a4a" fontWeight="700">Goa</text>
+              <text x="205" y="195" fontSize="20" fontFamily="Arial, Helvetica, sans-serif" fill="#ac7a4a" fontWeight="700">Delhi</text>
+              <text x="305" y="335" fontSize="20" fontFamily="Arial, Helvetica, sans-serif" fill="#ac7a4a" fontWeight="700">Jaipur</text>
+              <text x="370" y="225" fontSize="20" fontFamily="Arial, Helvetica, sans-serif" fill="#ac7a4a" fontWeight="700">Shimla</text>
+              <text x="424" y="445" fontSize="20" fontFamily="Arial, Helvetica, sans-serif" fill="#ac7a4a" fontWeight="700">Udaipur</text>
+              <text x="255" y="585" fontSize="20" fontFamily="Arial, Helvetica, sans-serif" fill="#ac7a4a" fontWeight="700">Goa</text>
             </svg>
           </div>
         </div>

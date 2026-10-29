@@ -1,6 +1,6 @@
 # 🌏 Devendra Sharma Tour & Travels
 
-A modern, responsive website for **Devendra Sharma Tour & Travels** — a domestic tour & travel business based in Meerut, Uttar Pradesh.
+A modern, responsive website for **Devendra Sharma Tour & Travels** — a domestic tour & travel business based in Muradnagar, Ghaziabad, Uttar Pradesh.
 
 Built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**.
 
@@ -39,6 +39,16 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 npm run build
 npm start
 ```
+
+## ✍️ Publishing blog posts with WordPress
+
+Set `WORDPRESS_API_URL` in the deployment environment to your public WordPress REST API base URL, for example:
+
+```env
+WORDPRESS_API_URL=https://your-wordpress-site.com/wp-json/wp/v2
+```
+
+Publish posts in WordPress as usual and set a featured image for each post. The site reads published posts, categories, author names, post content, and featured images through the WordPress REST API. Updates can take up to five minutes to appear. If the API is unavailable, the site falls back to its configured database or built-in articles.
 
 ---
 
@@ -125,4 +135,4 @@ Your website will be live at `https://devendra-travels.vercel.app`
 - [Next.js 14](https://nextjs.org/) — React framework
 - [TypeScript](https://www.typescriptlang.org/) — Type safety
 - [Tailwind CSS](https://tailwindcss.com/) — Styling
-- [Google Fonts](https://fonts.google.com/) — Playfair Display + DM Sans
+- Arial, Helvetica, and sans-serif system font stack
